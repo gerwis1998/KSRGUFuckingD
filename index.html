@@ -1,34 +1,49 @@
-<h1>M$ nie polecam</h1>
-<input type="text" id="guidInput" size="100">
-<br>
-<label for="guidInput">GUID like this "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</label>
-<br>
-<input type="text" id="output" size="100">
-<br>
-<label for="output">GUID like this "0xXXXXXXXX, 0xXXXX, 0xXXXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX"</label>
-<br>
-<button onclick="changeGUID()">Format</button>
-<script>
-    function getFirstPart(oldGUID){
-        return oldGUID.slice(0,3).map(function (x) {return "0x" + x}).join(", ")
-    }
-
-    function getSecondPart(oldGUID){
-        const string = oldGUID.slice(3,6).join("");
-        let outputStrings = [];
-        for(let i=0; i<string.length; i+=2){
-            outputStrings.push(string.slice(i, i+2));
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <title>M$ GUID Formater</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>M$ GUID Formater</h1>
+            <input type="text" id="guidInput" size="100">
+            <br>
+            <label for="guidInput">GUID like this "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</label>
+            <br>
+            <input type="text" id="output" size="100">
+            <br>
+            <label for="output">GUID like this "0xXXXXXXXX, 0xXXXX, 0xXXXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX, 0xXX"</label>
+            <br>
+            <button onclick="changeGUID()">Format</button>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+    <script>
+        function getFirstPart(oldGUID){
+            return oldGUID.slice(0,3).map(function (x) {return "0x" + x}).join(", ")
         }
-        return outputStrings.map(function (x){ return "0x" + x}).join(", ");
-    }
 
-    function changeGUID(){
-        const inputGUID = document.getElementById("guidInput");
-        const outputGUID = document.getElementById("output");
-        let oldGUID = inputGUID.value.split("-");
-        let firstPart = getFirstPart(oldGUID);
-        let secondPart = getSecondPart(oldGUID);
-        outputGUID.value = firstPart + ", " + secondPart;
-    }
-</script>
-<!-- M$ -->
+        function getSecondPart(oldGUID){
+            const string = oldGUID.slice(3,6).join("");
+            let outputStrings = [];
+            for(let i=0; i<string.length; i+=2){
+                outputStrings.push(string.slice(i, i+2));
+            }
+            return outputStrings.map(function (x){ return "0x" + x}).join(", ");
+        }
+
+        function changeGUID(){
+            const inputGUID = document.getElementById("guidInput");
+            const outputGUID = document.getElementById("output");
+            let oldGUID = inputGUID.value.split("-");
+            let firstPart = getFirstPart(oldGUID);
+            let secondPart = getSecondPart(oldGUID);
+            outputGUID.value = firstPart + ", " + secondPart;
+        }
+    </script>
+</html>
